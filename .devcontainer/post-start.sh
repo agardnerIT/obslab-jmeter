@@ -7,6 +7,6 @@
 #     \"type\": \"com.dynatrace.devrel.handson.codespace.started\",
 #     \"tenant\": \"$DT_URL\",
 #     \"repo\": \"$GITHUB_REPOSITORY\",
-#     \"demo\": \"obslab-k6\",
+#     \"demo\": \"obslab-jmeter\",
 #     \"codespace.name\": \"$CODESPACE_NAME\"
 #   }"
