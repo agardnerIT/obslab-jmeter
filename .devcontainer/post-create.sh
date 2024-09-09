@@ -10,8 +10,10 @@ tar -xf apache-jmeter-${JMETER_VERSION}.tgz
 # Source: https://stackoverflow.com/a/16623897/9997385
 prefix="https://"
 suffix="/"
-DT_URL=${DT_URL#"$prefix"}
-DT_URL=${DT_URL%"$suffix"}
+DT_URL_CLEANED=${DT_URL#"$prefix"}
+DT_URL_CLEANED=${DT_URL%"$suffix"}
+echo "DT_URL_CLEANER=${DT_URL}" >> /home/codespace/.bashrc
+source /home/codespace/.bashrc
 
 # Creation Ping
 # curl -X POST https://grzxx1q7wd.execute-api.us-east-1.amazonaws.com/default/codespace-tracker \
