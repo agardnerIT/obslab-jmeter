@@ -7,6 +7,7 @@ wget https://dlcdn.apache.org//jmeter/binaries/apache-jmeter-${JMETER_VERSION}.t
 tar -xf apache-jmeter-${JMETER_VERSION}.tgz
 
 # Chop off https:// and trailing slash from DT_URL
+# Source: https://stackoverflow.com/a/16623897/9997385
 prefix="https://"
 suffix="/"
 DT_URL=${DT_URL#"$prefix"}
