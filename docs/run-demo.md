@@ -1,12 +1,4 @@
 
-## Import Dynatrace Dashboard
-
-While you are waiting for the environment, add the dashboard to your Dynatrace environment.
-
-1. Save the [JMeter dashboard](https://github.com/dynatrace-perfclinics/obslab-jmeter/blob/main/dashboards/JMeter%20Dashboard.json){target=_blank} to your local machine.
-1. In Dynatrace, navigate to `Dashboards` and click `Upload`
-1. Upload the dashboard JSON file
-
 ## x-dynatrace-test Headers
 
 Open [jmeterscripts/example.jmx](https://github.com/Dynatrace/obslab-jmeter/blob/main/jmeterscripts/example.jmx){target=_blank} and notice a few things:
