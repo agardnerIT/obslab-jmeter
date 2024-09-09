@@ -11,7 +11,7 @@ tar -xf apache-jmeter-${JMETER_VERSION}.tgz
 prefix="https://"
 suffix="/"
 DT_URL_CLEANED=${DT_URL#"$prefix"}
-DT_URL_CLEANED=${DT_URL%"$suffix"}
+DT_URL_CLEANED=${DT_URL_CLEANED%"$suffix"}
 
 sed -i "s,DT_ENVIRONMENT_PLACEHOLDER,$DT_URL_CLEANED," jmeterscripts/example.jmx
 sed -i "s,DT_API_TOKEN_PLACEHOLDER,$DT_JMETER_TOKEN," jmeterscripts/example.jmx
