@@ -6,6 +6,12 @@ JMETER_VERSION=5.6.3
 wget https://dlcdn.apache.org//jmeter/binaries/apache-jmeter-${JMETER_VERSION}.tgz
 tar -xf apache-jmeter-${JMETER_VERSION}.tgz
 
+# Chop off https:// and trailing slash from DT_URL
+prefix="https://"
+suffix="/"
+DT_URL=${DT_URL#"$prefix"}
+DT_URL=${DT_URL%"$suffix"}
+
 # Creation Ping
 # curl -X POST https://grzxx1q7wd.execute-api.us-east-1.amazonaws.com/default/codespace-tracker \
 #   -H "Content-Type: application/json" \
