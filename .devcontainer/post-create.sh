@@ -5,6 +5,7 @@ JMETER_VERSION=5.6.3
 # Download and extract JMeter
 wget https://dlcdn.apache.org//jmeter/binaries/apache-jmeter-${JMETER_VERSION}.tgz
 tar -xf apache-jmeter-${JMETER_VERSION}.tgz
+mv apache-jmeter-${JMETER_VERSION} apache-jmeter
 
 # Chop off https:// and trailing slash from DT_URL
 # Source: https://stackoverflow.com/a/16623897/9997385
