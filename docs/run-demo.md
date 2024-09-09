@@ -31,11 +31,9 @@ apache-jmeter/bin/jmeter.sh -n -t jmeterscripts/example.jmx
 
 ## View Events
 
-When the load test finished, the [teardown function](TODO){target=_blank} sends a Software Delivery Lifecycle Event (SDLC) to Dynatrace.
+When the load test finished, the [teardown thread group](https://github.com/Dynatrace/obslab-jmeter/blob/fc0700075d990c9b5c95a2a69a98a8bc015e256f/jmeterscripts/example.jmx#L47){target=_blank} sends a Software Delivery Lifecycle Event (SDLC) to Dynatrace.
 
-```
-TODO
-```
+![teardown call](images/teardown.png)
 
 Notice that the event contains metadata such as the `provider` and `service` which can be used for filtering in Dynatrace (see DQL below).
 
