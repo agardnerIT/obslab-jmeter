@@ -1,0 +1,25 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/kubernetes-helm
+{
+	"name": "JMeter + Dynatrace Demo Environment",
+
+	"hostRequirements": {
+		"cpus": 2
+	},
+
+	// Use 'postCreateCommand' to run commands after the container is created.
+	"postCreateCommand": ".devcontainer/post-create.sh",
+
+	// Use 'postStartCommand' to run commands after the container starts.
+    "postStartCommand": ".devcontainer/post-start.sh",
+
+	// Add recommended secrets
+	"secrets": {
+	 	  "DT_URL": {
+	 		"description": "Dynatrace tenant URL (no trailing slash) eg. https://abc12345.live.dynatrace.com"
+		},
+		  "DT_JMETER_TOKEN": {
+	    	        "description": "Dynatrace API token with `openpipeline.events_sdlc` permissions"
+		}
+	}
+}
