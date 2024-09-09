@@ -2,7 +2,7 @@ This demo will run an [Apache JMeter](https://jmeter.apache.org){target=_blank} 
 
 This event can be used to trigger further automations such as Dynatrace workflows.
 
-![Dynatrace JMeter dashboard](images/jmeter-dashboard.png)
+![Dynatrace JMeter dashboard](images/sdlc-event.png)
 
 ## Compatibility
 
