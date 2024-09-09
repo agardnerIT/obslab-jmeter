@@ -18,11 +18,11 @@ sed -i "s,DT_ENVIRONMENT_PLACEHOLDER,$DT_URL_CLEANED," jmeterscripts/example.jmx
 sed -i "s,DT_API_TOKEN_PLACEHOLDER,$DT_JMETER_TOKEN," jmeterscripts/example.jmx
 
 # Creation Ping
-# curl -X POST https://grzxx1q7wd.execute-api.us-east-1.amazonaws.com/default/codespace-tracker \
-#   -H "Content-Type: application/json" \
-#   -d "{
-#     \"tenant\": \"$DT_URL\",
-#     \"repo\": \"$GITHUB_REPOSITORY\",
-#     \"demo\": \"obslab-jmeter\",
-#     \"codespace.name\": \"$CODESPACE_NAME\"
-#   }"
+curl -X POST https://grzxx1q7wd.execute-api.us-east-1.amazonaws.com/default/codespace-tracker \
+  -H "Content-Type: application/json" \
+  -d "{
+    \"tenant\": \"$DT_URL\",
+    \"repo\": \"$GITHUB_REPOSITORY\",
+    \"demo\": \"obslab-jmeter\",
+    \"codespace.name\": \"$CODESPACE_NAME\"
+  }"
