@@ -56,7 +56,7 @@
       </PostThreadGroup>
       <hashTree>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="SDLC Event">
-          <stringProp name="HTTPSampler.domain">DT_ENVIRONMENT_PLACEHOLDER.live.dynatrace.com</stringProp>
+          <stringProp name="HTTPSampler.domain">DT_ENVIRONMENT_PLACEHOLDER</stringProp>
           <stringProp name="HTTPSampler.protocol">https</stringProp>
           <stringProp name="HTTPSampler.path">/platform/ingest/v1/events.sdlc</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
