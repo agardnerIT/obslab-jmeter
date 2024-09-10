@@ -15,7 +15,16 @@ Reformat the URL like this: `https://TENANT_ID.live.dynatrace.com` eg. `https://
 
 Create an API token with the following permissions:
 
+- `ReadConfig`
+- `DataExport`
+- `CaptureRequestData`
 - `openpipeline.events_sdlc`
+
+The `ReadConfig`, `DataExport` and `CaptureRequestData` permissions will be used by the Monaco Configuration as Code utility to apply configuration to your Dynatrace environment.
+This configuration will capture the `x-dynatrace-test` HTTP header and process the values described [here](https://docs.dynatrace.com/docs/platform-modules/automations/cloud-automation/test-automation){target=_blank}.
+
+
+The `openpipeline.events_sdlc` permission is required to send the "load test finished" SDLC event to Dynatrace.
 
 ## Start Demo
 
