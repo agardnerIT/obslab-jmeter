@@ -54,8 +54,6 @@ fetch events
 
 ![sdlc event](images/sdlc-event.png)
 
-User exercise: Modify the JSON body to also send the number of Virtual Users (VUs) used to Dynatrace. Re-run the load test to see the new event.
-
 The demo is complete.
 
 <div class="grid cards" markdown>
