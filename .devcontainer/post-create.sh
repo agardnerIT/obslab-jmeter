@@ -25,8 +25,8 @@ sed -i "s,DT_ENVIRONMENT_PLACEHOLDER,$DT_URL_CLEANED," jmeterscripts/example.jmx
 sed -i "s,DT_API_TOKEN_PLACEHOLDER,$DT_JMETER_TOKEN," jmeterscripts/example.jmx
 
 # Apply Monaco config to tenant
-#sed -i "s,DT_ENVIRONMENT_PLACEHOLDER,$DT_URL_CLEANED," monaco/manifest.yaml
-#monaco deploy monaco/manifest.yaml
+#sed -i "s,DT_ENVIRONMENT_PLACEHOLDER,$DT_URL_CLEANED," dynatrace/monaco/manifest.yaml
+#monaco deploy dynatrace/monaco/manifest.yaml
 
 # Creation Ping
 # curl -X POST https://grzxx1q7wd.execute-api.us-east-1.amazonaws.com/default/codespace-tracker \
