@@ -1,3 +1,4 @@
 site/*
 apache-jmeter*
 jmeterscripts/example.jmx
+.logs

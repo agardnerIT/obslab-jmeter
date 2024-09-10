@@ -19,7 +19,7 @@
 	 		"description": "Dynatrace tenant URL (no trailing slash) eg. https://abc12345.live.dynatrace.com"
 		},
 		  "DT_JMETER_TOKEN": {
-	    	        "description": "Dynatrace API token with `openpipeline.events_sdlc` permissions"
+	    	        "description": "Dynatrace API token with `openpipeline.events_sdlc`, `ReadConfig`, `DataExport` and `CaptureRequestData` permissions"
 		}
 	}
 }
