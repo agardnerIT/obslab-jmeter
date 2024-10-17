@@ -1,3 +1,8 @@
+# Dynatrace Observability Lab: Apache JMeter Observability
+
+--8<-- "snippets/disclaimer.md"
+--8<-- "snippets/view-code.md"
+
 This demo will run an [Apache JMeter](https://jmeter.apache.org){target=_blank} script and send a [Dynatrace SDLC event](https://docs.dynatrace.com/docs/platform/openpipeline/reference/openpipeline-ingest-api/sdlc-events/events-sdlc-builtin){target=_blank} when the load test is finished.
 
 The HTTP requests in the JMX file are also instrumented with the recommended `x-dynatrace-test` headers.
