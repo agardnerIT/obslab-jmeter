@@ -2,6 +2,7 @@
 // README at: https://github.com/devcontainers/templates/tree/main/src/kubernetes-helm
 {
 	"name": "JMeter + Dynatrace Demo Environment",
+	"image": "mcr.microsoft.com/devcontainers/universal:linux",
 
 	"hostRequirements": {
 		"cpus": 2
