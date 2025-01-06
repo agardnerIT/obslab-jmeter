@@ -1,10 +1,11 @@
 
 ## x-dynatrace-test Headers
 
-> Note: You won't see these values (or any traffic in Dynatrace) by default
-> because the load test is hitting `example.com`
->
-> If you have a service instrumented with OneAgent or OpenTelemetry, modify `example.jmx` to hit your URL instead to see traffic.
+!!! note "Expect No Traffic in Dynatrace"
+    You won't see these values (or any traffic in Dynatrace) by default
+    because the load test is hitting `example.com`
+
+    If you have a service instrumented with OneAgent or OpenTelemetry, modify `example.jmx` to hit your URL instead to see traffic.
 
 Open [jmeterscripts/example.jmx](https://github.com/Dynatrace/obslab-jmeter/blob/main/jmeterscripts/example.jmx){target=_blank} and notice a few things:
 
