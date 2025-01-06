@@ -28,6 +28,8 @@ The `openpipeline.events_sdlc` permission is required to send the "load test fin
 
 ## Start Demo
 
+--8<-- "snippets/codespace-details-warning-box.md"
+
 Click this button to launch the demo in a new tab.
 
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/dynatrace/obslab-jmeter){target=_blank}
