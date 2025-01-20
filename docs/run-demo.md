@@ -64,3 +64,4 @@ The demo is complete.
 
 <div class="grid cards" markdown>
 - [Click Here to Delete and Cleanup resources :octicons-arrow-right-24:](cleanup.md)
+</div>
