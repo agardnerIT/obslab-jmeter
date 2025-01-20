@@ -32,7 +32,7 @@ This event allows integration opportunitities into other Dynatrace functionality
 In the codespace terminal, paste the following:
 
 ```
-apache-jmeter/bin/jmeter.sh -n -t jmeterscripts/example.jmx
+/workspaces/$RepositoryName/apache-jmeter/bin/jmeter.sh -n -t /workspaces/$RepositoryName/jmeterscripts/example.jmx
 ```
 
 ## View Events
