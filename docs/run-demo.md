@@ -31,7 +31,7 @@ This event allows integration opportunitities into other Dynatrace functionality
 
 In the codespace terminal, paste the following:
 
-```
+```sh { "name": "run jmeter"}
 /workspaces/$RepositoryName/apache-jmeter/bin/jmeter.sh -n -t /workspaces/$RepositoryName/jmeterscripts/example.jmx
 ```
 
@@ -51,7 +51,7 @@ In Dynatrace:
 * Open an existing notebook or create a new one
 * Add a new `DQL` section and paste the following
 
-```
+``` { "name": "fetch jmeter sdlc events dql" }
 fetch events
 | filter event.kind == "SDLC_EVENT"
 | filter event.provider == "jmeter"
