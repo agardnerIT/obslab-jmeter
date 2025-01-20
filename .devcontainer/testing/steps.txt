@@ -1,0 +1,3 @@
+run jmeter
+sleep 30
+test_dynatrace_ui.py
