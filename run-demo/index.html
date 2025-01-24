@@ -369,6 +369,15 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#view-events" class="md-nav__link">
+    <span class="md-ellipsis">
+      View Events
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -488,6 +497,15 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#view-events" class="md-nav__link">
+    <span class="md-ellipsis">
+      View Events
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -532,30 +550,24 @@ because the load test is hitting <code>example.com</code></p>
 <p>This event allows integration opportunitities into other Dynatrace functionality such as triggering workflows automatically at the end of a load test.</p>
 <h2 id="run-jmeter">Run JMeter<a class="headerlink" href="#run-jmeter" title="Permanent link">#</a></h2>
 <p>In the codespace terminal, paste the following:</p>
-<p>```sh { "name": "run jmeter" }
-/workspaces/$RepositoryName/apache-jmeter/bin/jmeter.sh -n -t /workspaces/$RepositoryName/jmeterscripts/example.jmx
-<div class="highlight"><pre><span></span><code>## View Events
-
-When the load test finished, the [teardown thread group](https://github.com/Dynatrace/obslab-jmeter/blob/fc0700075d990c9b5c95a2a69a98a8bc015e256f/jmeterscripts/example.jmx#L47){target=_blank} sends a Software Delivery Lifecycle Event (SDLC) to Dynatrace.
-
-![teardown call](images/teardown.png)
-
-Notice that the event contains metadata such as the `provider` and `service` which can be used for filtering in Dynatrace (see DQL below).
-
-This event can be used as a trigger Dynatrace for workflows, synthetic tests, the site reliability guardian and more.
-
-In Dynatrace:
-
-* Press `ctrl + k` and search for `notebooks`
-* Open an existing notebook or create a new one
-* Add a new `DQL` section and paste the following
-
-``` { &quot;name&quot;: &quot;fetch jmeter sdlc events dql&quot; }
-fetch events
+<div class="highlight"><pre><span></span><code>/workspaces/$RepositoryName/apache-jmeter/bin/jmeter.sh -n -t /workspaces/$RepositoryName/jmeterscripts/example.jmx
+</code></pre></div>
+<h2 id="view-events">View Events<a class="headerlink" href="#view-events" title="Permanent link">#</a></h2>
+<p>When the load test finished, the <a href="https://github.com/Dynatrace/obslab-jmeter/blob/fc0700075d990c9b5c95a2a69a98a8bc015e256f/jmeterscripts/example.jmx#L47" target="_blank">teardown thread group</a> sends a Software Delivery Lifecycle Event (SDLC) to Dynatrace.</p>
+<p><img alt="teardown call" src="../images/teardown.png" /></p>
+<p>Notice that the event contains metadata such as the <code>provider</code> and <code>service</code> which can be used for filtering in Dynatrace (see DQL below).</p>
+<p>This event can be used as a trigger Dynatrace for workflows, synthetic tests, the site reliability guardian and more.</p>
+<p>In Dynatrace:</p>
+<ul>
+<li>Press <code>ctrl + k</code> and search for <code>notebooks</code></li>
+<li>Open an existing notebook or create a new one</li>
+<li>Add a new <code>DQL</code> section and paste the following</li>
+</ul>
+<div class="highlight"><pre><span></span><code>fetch events
 | filter event.kind == &quot;SDLC_EVENT&quot;
 | filter event.provider == &quot;jmeter&quot;
 | filter event.category == &quot;finished&quot;
-</code></pre></div></p>
+</code></pre></div>
 <p><img alt="sdlc event" src="../images/sdlc-event.png" /></p>
 <p>The demo is complete.</p>
 <div class="grid cards">
