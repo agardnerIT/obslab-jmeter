@@ -1,15 +1,5 @@
-## Gather Details: Tenant ID
-
-You will need access to a Dynatrace tenant. If you do not have access, [sign up for a free 15 day trial](https://dt-url.net/trial){target=_blank}.
-
-Make a note of your Dynatrace tenant ID. It is the first bit of your URL (eg. `abc12345` in the following examples):
-
-```
-https://abc12345.live.dynatrace.com
-https://abc12345.apps.dynatrace.com
-```
-
-Reformat the URL like this: `https://TENANT_ID.live.dynatrace.com` eg. `https://abc12345.live.dynatrace.com`
+--8<-- "snippets/live-code-snippets.md"
+--8<-- "snippets/tenant-id.md"
 
 ## Gather Details: Create API Token
 
@@ -25,6 +15,8 @@ This configuration will capture the `x-dynatrace-test` HTTP header and process t
 
 
 The `openpipeline.events_sdlc` permission is required to send the "load test finished" SDLC event to Dynatrace.
+
+--8<-- "snippets/info-required.md"
 
 ## Start Demo
 
