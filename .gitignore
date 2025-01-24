@@ -2,3 +2,5 @@ site/*
 apache-jmeter*
 jmeterscripts/example.jmx
 .logs
+__pycache__
+notes.txt
