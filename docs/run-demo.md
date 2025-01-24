@@ -31,7 +31,7 @@ This event allows integration opportunitities into other Dynatrace functionality
 
 In the codespace terminal, paste the following:
 
-```sh { "name": "run jmeter" }
+``` { "name": "run jmeter" }
 /workspaces/$RepositoryName/apache-jmeter/bin/jmeter.sh -n -t /workspaces/$RepositoryName/jmeterscripts/example.jmx
 ```
 
