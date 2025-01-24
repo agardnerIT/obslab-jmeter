@@ -33,7 +33,7 @@ run_command(["monaco", "deploy", f"{BASE_DIR}/dynatrace/monaco/manifest.yaml"])
 # Download and extract JMeter
 run_command(["wget", "-O", "apache-jmeter.tgz", f"https://dlcdn.apache.org//jmeter/binaries/apache-jmeter-{JMETER_VERSION}.tgz"])
 run_command(["tar", "-xf", "apache-jmeter.tgz"])
-run_command(["mv", f"apache-jmeter-{JMETER_VERSION}", "apache-jmeter"]])
+run_command(["mv", f"apache-jmeter-{JMETER_VERSION}", "apache-jmeter"])
 
 # Install RunMe
 run_command(["mkdir", "runme_binary"])
