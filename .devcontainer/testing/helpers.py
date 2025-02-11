@@ -302,4 +302,16 @@ def set_env_var(key, value, env_filename=".bashrc"):
         file.write(f"\nexport {key}={value}")
 
     # Reload the environment variables
-    os.system(f". {env_var_file}")
+    #os.system(f". {env_var_file}")
+
+    # Source the file and capture the environment variables
+    command = f". {env_var_file} && env"
+    proc = subprocess.Popen(command, stdout=subprocess.PIPE, shell=True, executable='/bin/bash')
+    output, _ = proc.communicate()
+
+    # Update the current environment with the variables from the file
+    for line in output.decode().splitlines():
+        key, _, value = line.partition("=")
+        os.environ[key] = value
+
+    # Now the environment variables should be updated in the current Python process
