@@ -52,6 +52,9 @@ DT_OAUTH_CLIENT_ID = os.environ.get("DT_OAUTH_CLIENT_ID")
 DT_OAUTH_CLIENT_SECRET = os.environ.get("DT_OAUTH_CLIENT_SECRET")
 DT_OAUTH_ACCOUNT_URN = os.environ.get("DT_OAUTH_ACCOUNT_URN")
 
+# This will only be defined if repo is used for testing
+DT_API_TOKEN_TESTING = os.environ.get("DT_API_TOKEN_TESTING", "")
+
 def run_command(args, ignore_errors=False):
     output = subprocess.run(args, capture_output=True, text=True, encoding="UTF8")
 
