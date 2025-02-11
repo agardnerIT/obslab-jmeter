@@ -18,6 +18,7 @@ TESTING_DYNATRACE_USER_EMAIL = os.environ.get("TESTING_DYNATRACE_USER_EMAIL", ""
 TESTING_DYNATRACE_USER_PASSWORD = os.environ.get("TESTING_DYNATRACE_USER_PASSWORD", "")
 REPOSITORY_NAME = os.environ.get("RepositoryName", "")
 DEV_MODE = os.environ.get("DEV_MODE", "FALSE").upper() # This is a string. NOT a bool.
+CURRENT_USER = getpass.getuser()
 
 TESTING_BASE_DIR = ""
 if DEV_MODE == "TRUE":
@@ -289,16 +290,23 @@ def create_dt_api_token(token_name, scopes, dt_rw_api_token, dt_tenant_live):
 
 # Set a system-wide environment variable
 # Defaults to bash shell but can be overriden
+def store_env_var(key, value, env_filepath=f"/workspaces/{REPOSITORY_NAME}/.devcontainer/testing/.env"):
+    with open(file=env_filepath, mode="a+") as env_file:
+        env_file.write(f"{key}={value}")
+
 def set_env_var(key, value, env_filename=".bashrc"):
+<<<<<<< HEAD
     current_user = getpass.getuser()
 
+=======
+>>>>>>> 55e4665b8675df94b7522e43351078e8c5fa7673
     # Open the /etc/environment file in append mode
     env_var_file = f"/home/{current_user}/{env_filename}"
     with open(env_var_file, "a") as file:
         file.write(f"\nexport {key}={value}")
 
     # Reload the environment variables
-    #os.system(f". {env_var_file}")
+    os.system(f". {env_var_file}")
 
     # Source the file and capture the environment variables
     command = f". {env_var_file} && env"
@@ -307,7 +315,12 @@ def set_env_var(key, value, env_filename=".bashrc"):
 
     # Update the current environment with the variables from the file
     for line in output.decode().splitlines():
-        key, _, value = line.partition("=")
+        k, _, v = line.partition("=")
+        if k == "DT_API_TOKEN":
+            logger.info(f"Setting {k}={v}")
         os.environ[key] = value
+    
+    # Verify the environment variable is set
+    logger.info(f"New Value set to: {os.environ.get('DT_API_TOKEN')}")
 
     # Now the environment variables should be updated in the current Python process

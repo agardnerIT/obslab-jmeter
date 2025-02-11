@@ -16,10 +16,13 @@ DT_TENANT_APPS, DT_TENANT_LIVE = build_dt_urls(dt_env_id=DT_ENVIRONMENT_ID, dt_e
 # Process further. Jmeter needs just abc12345.live.dynatrace. Chop off https://
 DT_TENANT_LIVE_FOR_JMETER = DT_TENANT_LIVE.replace("https://", "")
 
+# Use "main" DT_API_TOKEN to create new, temporary, properly scoped API tokens
+DT_API_TOKEN_FOR_USE = create_dt_api_token(token_name="[devrel e2e testing] DT_JMETER_E2E_TEST_TOKEN", scopes=["ReadConfig", "DataExport", "CaptureRequestData", "openpipeline.events_sdlc"], dt_rw_api_token=DT_API_TOKEN, dt_tenant_live=DT_TENANT_LIVE)
+
 # Replace placeholders
 do_file_replace(pattern=f"{BASE_DIR}/dynatrace/monaco/manifest.yaml", find_string="DT_ENVIRONMENT_PLACEHOLDER", replace_string=DT_TENANT_LIVE)
 do_file_replace(pattern=f"{BASE_DIR}/jmeterscripts/example.jmx", find_string="DT_TENANT_LIVE_PLACEHOLDER", replace_string=DT_TENANT_LIVE_FOR_JMETER)
-do_file_replace(pattern=f"{BASE_DIR}/jmeterscripts/example.jmx", find_string="DT_API_TOKEN_PLACEHOLDER", replace_string=DT_API_TOKEN)
+do_file_replace(pattern=f"{BASE_DIR}/jmeterscripts/example.jmx", find_string="DT_API_TOKEN_PLACEHOLDER", replace_string=DT_API_TOKEN_FOR_USE)
 
 # Download Monaco
 run_command(["curl", "-L", f"https://github.com/Dynatrace/dynatrace-configuration-as-code/releases/download/{MONACO_VERSION}/monaco-linux-amd64", "-o", "monaco-linux-amd64"])

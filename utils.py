@@ -219,16 +219,16 @@ def get_sso_token_url(dt_env_type="live"):
     else:
         return None
     
-def create_dt_api_token(token_name, scopes, dt_api_token, dt_tenant_live):
+def create_dt_api_token(token_name, scopes, dt_rw_api_token, dt_tenant_live):
 
-    # Automatically expire tokens 1 day in future.
-    time_future = datetime.datetime.now() + datetime.timedelta(days=1)
+    # Automatically expire tokens 1 hour in future.
+    time_future = datetime.datetime.now() + datetime.timedelta(hours=1)
     expiry_date = time_future.strftime("%Y-%m-%dT%H:%M:%S.999Z")
 
     headers = {
         "accept": "application/json; charset=utf-8",
         "content-type": "application/json; charset=utf-8",
-        "authorization": f"api-token {dt_api_token}"
+        "authorization": f"api-token {dt_rw_api_token}"
     }
 
     payload = {
