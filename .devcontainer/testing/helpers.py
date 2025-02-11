@@ -295,11 +295,8 @@ def store_env_var(key, value, env_filepath=f"/workspaces/{REPOSITORY_NAME}/.devc
         env_file.write(f"{key}={value}")
 
 def set_env_var(key, value, env_filename=".bashrc"):
-<<<<<<< HEAD
     current_user = getpass.getuser()
 
-=======
->>>>>>> 55e4665b8675df94b7522e43351078e8c5fa7673
     # Open the /etc/environment file in append mode
     env_var_file = f"/home/{current_user}/{env_filename}"
     with open(env_var_file, "a") as file:
