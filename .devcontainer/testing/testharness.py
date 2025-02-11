@@ -11,9 +11,6 @@ DT_API_TOKEN = os.getenv("DT_API_TOKEN","")
 DT_TENANT_APPS, DT_TENANT_LIVE = build_dt_urls(dt_env_id=DT_ENVIRONMENT_ID, dt_env_type=DT_ENVIRONMENT_TYPE)
 DT_API_TOKEN_TO_USE = create_dt_api_token(token_name="[devrel e2e testing] DT_JMETER_E2E_TEST_TOKEN", scopes=["ReadConfig", "DataExport", "CaptureRequestData", "openpipeline.events_sdlc"], dt_rw_api_token=DT_API_TOKEN, dt_tenant_live=DT_TENANT_LIVE)
 set_env_var(key="DT_API_TOKEN", value=DT_API_TOKEN_TO_USE)
-logger.info(DT_API_TOKEN)
-logger.info(DT_API_TOKEN_TO_USE)
-exit()
 
 steps = get_steps(f"/workspaces/{REPOSITORY_NAME}/.devcontainer/testing/steps.txt")
 
