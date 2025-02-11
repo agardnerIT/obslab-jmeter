@@ -1,7 +1,9 @@
-import os, re, subprocess
+import os, re, subprocess, getpass
 from playwright.sync_api import Page, expect, FrameLocator
 from loguru import logger
 import pytest
+import requests
+import datetime
 
 WAIT_TIMEOUT = 10000
 SECTION_TYPE_METRICS = "Metrics"
@@ -15,9 +17,15 @@ DT_API_TOKEN = os.environ.get("DT_API_TOKEN", "")
 TESTING_DYNATRACE_USER_EMAIL = os.environ.get("TESTING_DYNATRACE_USER_EMAIL", "")
 TESTING_DYNATRACE_USER_PASSWORD = os.environ.get("TESTING_DYNATRACE_USER_PASSWORD", "")
 REPOSITORY_NAME = os.environ.get("RepositoryName", "")
-TESTING_BASE_DIR = f"/workspaces/{REPOSITORY_NAME}/.devcontainer/testing"
-
 DEV_MODE = os.environ.get("DEV_MODE", "FALSE").upper() # This is a string. NOT a bool.
+
+TESTING_BASE_DIR = ""
+if DEV_MODE == "TRUE":
+    TESTING_BASE_DIR = f"./"
+else:
+    TESTING_BASE_DIR = f"/workspaces/{REPOSITORY_NAME}/.devcontainer/testing"
+
+
 
 def get_steps(filename):
     with open(filename, mode="r") as steps_file:
@@ -233,3 +241,65 @@ def retrieve_dql_query(snippet_name):
         snippet += line
         current_position += 1
     return snippet
+
+def build_dt_urls(dt_env_id, dt_env_type="live"):
+    if dt_env_type.lower() == "live":
+        dt_tenant_apps = f"https://{dt_env_id}.apps.dynatrace.com"
+        dt_tenant_live = f"https://{dt_env_id}.live.dynatrace.com"
+    else:
+      dt_tenant_apps = f"https://{dt_env_id}.{dt_env_type}.apps.dynatrace.com"
+      dt_tenant_live = f"https://{dt_env_id}.{dt_env_type}.dynatrace.com"
+
+    # if environment is "dev" or "sprint"
+    # ".dynatracelabs.com" not ".dynatrace.com"
+    if dt_env_type.lower() == "dev" or dt_env_type.lower() == "sprint":
+        dt_tenant_apps = dt_tenant_apps.replace(".dynatrace.com", ".dynatracelabs.com")
+        dt_tenant_live = dt_tenant_live.replace(".dynatrace.com", ".dynatracelabs.com")
+    
+    return dt_tenant_apps, dt_tenant_live
+
+def create_dt_api_token(token_name, scopes, dt_rw_api_token, dt_tenant_live):
+
+    # Automatically expire tokens 1 hour in future.
+    time_future = datetime.datetime.now() + datetime.timedelta(hours=1)
+    expiry_date = time_future.strftime("%Y-%m-%dT%H:%M:%S.999Z")
+
+    headers = {
+        "accept": "application/json; charset=utf-8",
+        "content-type": "application/json; charset=utf-8",
+        "authorization": f"api-token {dt_rw_api_token}"
+    }
+
+    payload = {
+        "name": token_name,
+        "scopes": scopes,
+        "expirationDate": expiry_date
+    }
+
+    resp = requests.post(
+        url=f"{dt_tenant_live}/api/v2/apiTokens",
+        headers=headers,
+        json=payload
+    )
+
+    if resp.status_code != 201:
+        exit(f"Cannot create DT API token: {token_name}. Response was: {resp.status_code}. {resp.text}. Exiting.")
+
+    return resp.json()['token']
+
+# Set a system-wide environment variable
+# Defaults to bash shell but can be overriden
+def set_env_var(key, value, env_filename=".bashrc"):
+    current_user = getpass.getuser()
+
+    # Define the environment variable and its value
+    variable_name = "FOO"
+    variable_value = "BAR6"
+
+    # Open the /etc/environment file in append mode
+    env_var_file = f"/home/{current_user}/{env_filename}"
+    with open(env_var_file, "a") as file:
+        file.write(f"\nexport {key}={value}")
+
+    # Reload the environment variables
+    os.system(f". {env_var_file}")
