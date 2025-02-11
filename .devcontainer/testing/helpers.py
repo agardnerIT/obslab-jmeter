@@ -292,10 +292,6 @@ def create_dt_api_token(token_name, scopes, dt_rw_api_token, dt_tenant_live):
 def set_env_var(key, value, env_filename=".bashrc"):
     current_user = getpass.getuser()
 
-    # Define the environment variable and its value
-    variable_name = "FOO"
-    variable_value = "BAR6"
-
     # Open the /etc/environment file in append mode
     env_var_file = f"/home/{current_user}/{env_filename}"
     with open(env_var_file, "a") as file:
