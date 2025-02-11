@@ -4,3 +4,4 @@ jmeterscripts/example.jmx
 .logs
 __pycache__
 notes.txt
+.env
