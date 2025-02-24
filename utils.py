@@ -55,8 +55,21 @@ DT_OAUTH_ACCOUNT_URN = os.environ.get("DT_OAUTH_ACCOUNT_URN")
 # This will only be defined if repo is used for testing
 DT_API_TOKEN_TESTING = os.environ.get("DT_API_TOKEN_TESTING", "")
 
-def run_command(args, ignore_errors=False):
-    output = subprocess.run(args, capture_output=True, text=True, encoding="UTF8")
+def run_command(args, ignore_errors=False, cwd=None):
+
+    logger.info("GOT HERE...")
+
+    output = None
+
+    logger.info(f"GOT HERE 2: {cwd}")
+    if cwd is None:
+        logger.info("HERE 4a")
+        output = subprocess.run(args, capture_output=True, text=True, encoding="UTF8")
+    else:
+        logger.info("HERE 4b")
+        output = subprocess.run(args, capture_output=True, text=True, encoding="UTF8", cwd=cwd)
+    
+    logger.info("GOT HERE 3")
 
     # Secure coding. Don't print sensitive info to console.
     # Find common elements between blocked words and args.
