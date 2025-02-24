@@ -4,6 +4,7 @@ from loguru import logger
 import pytest
 import requests
 import datetime
+import platform
 
 WAIT_TIMEOUT = 10000
 SECTION_TYPE_METRICS = "Metrics"
@@ -13,7 +14,7 @@ SECTION_TYPE_MARKDOWN = "Markdown"
 
 DT_ENVIRONMENT_ID = os.environ.get("DT_ENVIRONMENT_ID", "")
 DT_ENVIRONMENT_TYPE = os.environ.get("DT_ENVIRONMENT_TYPE", "live")
-DT_API_TOKEN = os.environ.get("DT_API_TOKEN", "")
+DT_API_TOKEN_TESTING = os.environ.get("DT_API_TOKEN_TESTING", "")
 TESTING_DYNATRACE_USER_EMAIL = os.environ.get("TESTING_DYNATRACE_USER_EMAIL", "")
 TESTING_DYNATRACE_USER_PASSWORD = os.environ.get("TESTING_DYNATRACE_USER_PASSWORD", "")
 REPOSITORY_NAME = os.environ.get("RepositoryName", "")
@@ -47,7 +48,7 @@ def create_github_issue(output, step_name):
 if (
       DT_ENVIRONMENT_ID == "" or
       DT_ENVIRONMENT_TYPE == "" or
-      DT_API_TOKEN == "" or
+      DT_API_TOKEN_TESTING == "" or
       TESTING_DYNATRACE_USER_EMAIL == "" or
       TESTING_DYNATRACE_USER_PASSWORD == ""
    ):
@@ -290,34 +291,70 @@ def create_dt_api_token(token_name, scopes, dt_rw_api_token, dt_tenant_live):
 
 # Set a system-wide environment variable
 # Defaults to bash shell but can be overriden
-def store_env_var(key, value, env_filepath=f"/workspaces/{REPOSITORY_NAME}/.devcontainer/testing/.env"):
-    with open(file=env_filepath, mode="a+") as env_file:
-        env_file.write(f"{key}={value}")
+def store_env_var(key, value):
+    with open(file=".env", mode="a") as env_file:
+        env_file.write(f"{key}={value}\n")
 
-def set_env_var(key, value, env_filename=".bashrc"):
-    current_user = getpass.getuser()
+# def detect_os():
+#     os_name = os.name
+#     platform_system = platform.system()
+#     platform_release = platform.release()
 
-    # Open the /etc/environment file in append mode
-    env_var_file = f"/home/{current_user}/{env_filename}"
-    with open(env_var_file, "a") as file:
-        file.write(f"\nexport {key}={value}")
-
-    # Reload the environment variables
-    os.system(f". {env_var_file}")
-
-    # Source the file and capture the environment variables
-    command = f". {env_var_file} && env"
-    proc = subprocess.Popen(command, stdout=subprocess.PIPE, shell=True, executable='/bin/bash')
-    output, _ = proc.communicate()
-
-    # Update the current environment with the variables from the file
-    for line in output.decode().splitlines():
-        k, _, v = line.partition("=")
-        if k == "DT_API_TOKEN":
-            logger.info(f"Setting {k}={v}")
-        os.environ[key] = value
+#     if os_name == 'nt':
+#         print("Operating System: Windows")
+#     elif os_name == 'posix':
+#         print("Operating System: Unix-like (Linux/Mac)")
+#     else:
+#         print("Operating System: Unknown")
     
-    # Verify the environment variable is set
-    logger.info(f"New Value set to: {os.environ.get('DT_API_TOKEN')}")
+#     print(f"Platform System >>: {platform_system}")
+#     print(f"Platform Release >>: {platform_release}")
 
-    # Now the environment variables should be updated in the current Python process
+# def set_env_var(key, value, env_filename=".bashrc"):
+#     current_user = getpass.getuser()
+
+#     # Get current OS and switch
+#     # depending on that
+#     platform_system = platform.system()
+#     if platform_system.lower() == "windows":
+#         # Do WIN logic
+#         # Set the environment variable for the current session
+#         os.environ[key] = value
+#         logger.info(f"Setting {key}={value} for the current session")
+
+#         # Set the environment variable permanently
+#         command = f'setx {key} "{value}"'
+#         try:
+#             subprocess.run(command, check=True, shell=True)
+#             logger.info(f"Successfully set {key}={value} permanently")
+#         except subprocess.CalledProcessError as e:
+#             logger.error(f"Failed to set {key} permanently: {e}")
+
+#         # Verify the environment variable is set
+#         new_value = os.environ.get(key)
+#         logger.info(f"New Value set to: {new_value}")
+#     elif platform_system.lower() == "linux":
+#         # Open the /etc/environment file in append mode
+#         env_var_file = f"/home/{current_user}/{env_filename}"
+#         with open(env_var_file, "a") as file:
+#             file.write(f"\nexport {key}={value}")
+
+#         # Reload the environment variables
+#         os.system(f". {env_var_file}")
+
+#         # Source the file and capture the environment variables
+#         command = f". {env_var_file} && env"
+#         proc = subprocess.Popen(command, stdout=subprocess.PIPE, shell=True, executable='/bin/bash')
+#         output, _ = proc.communicate()
+
+#         # Update the current environment with the variables from the file
+#         for line in output.decode().splitlines():
+#             k, _, v = line.partition("=")
+#             if k == "DT_API_TOKEN":
+#                 logger.info(f"Setting {k}={v}")
+#             os.environ[key] = value
+        
+#         # Verify the environment variable is set
+#         logger.info(f"New Value set to: {os.environ.get('DT_API_TOKEN')}")
+
+#         # Now the environment variables should be updated in the current Python process
