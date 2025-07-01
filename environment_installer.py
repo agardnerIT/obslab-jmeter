@@ -7,7 +7,7 @@ REPOSITORY_NAME = os.environ.get("RepositoryName", "")
 
 MONACO_VERSION="v2.15.2"
 JMETER_VERSION="5.6.3"
-RUNME_CLI_VERSION = "3.10.2"
+RUNME_CLI_VERSION = "3.13.2"
 
 # Build DT environment URLs
 DT_TENANT_APPS, DT_TENANT_LIVE = build_dt_urls(dt_env_id=DT_ENVIRONMENT_ID, dt_env_type=DT_ENVIRONMENT_TYPE)
